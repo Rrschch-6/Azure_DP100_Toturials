@@ -12,11 +12,12 @@ There are three common protocols when working with data in the context of Azure 
 # Create Datastore
 When you create a datastore with an existing storage account on Azure, you have the choice between two different authentication methods:
 
-- **Credential-based**: Use a service principal, __shared access signature (SAS) token__ or __account key__ to authenticate access to your storage account.
+- **Credential-based**: Use a service principal, __shared access signature (SAS) token__ or __account key__ (you get account key from Storage Account,Access Key) to authenticate access to your storage account.
 - **Identity-based**: Use your Microsoft Entra identity or managed identity.
 
 *Create Datastore with Account Key:*
-
+<pre>
+```python
 blob_datastore = AzureBlobDatastore(
     			name = "blob_example",
     			description = "Datastore pointing to a blob container",
@@ -27,10 +28,24 @@ blob_datastore = AzureBlobDatastore(
     			),
 )
 ml_client.create_or_update(blob_datastore)
-
+```
+</pre>
 *Create Datastore with SAS Key:*
 
-blob_datastore = AzureBlobDatastore(
+blob_datastore = AzureBlobDatastore(from azure.ai.ml.entities import Data
+from azure.ai.ml.constants import AssetTypes
+
+my_path = '<supported-path>'
+
+my_data = Data(
+    path=my_path,
+    type=AssetTypes.URI_FILE,
+    description="<description>",
+    name="<name>",
+    version="<version>"
+)
+
+ml_client.data.create_or_update(my_data)
 name="blob_sas_example",
 description="Datastore pointing to a blob container",
 account_name="mytestblobstore",
@@ -54,7 +69,7 @@ he supported paths you can use when creating a URI file data asset are:
 
 When you create a data asset and point to a file or folder stored on your local device, a copy of the file or folder will be uploaded to the default datastore workspaceblobstore.
 
-**Create a URI file data asset**
+**Create a URI file/folder data asset**
 from azure.ai.ml.entities import Data
 from azure.ai.ml.constants import AssetTypes
 
@@ -62,10 +77,18 @@ my_path = '<supported-path>'
 
 my_data = Data(
     path=my_path,
-    type=AssetTypes.URI_FILE,
+    type=AssetTypes.URI_FILE, or URI_FOLDER
     description="<description>",
     name="<name>",
     version="<version>"
 )
 
 ml_client.data.create_or_update(my_data)
+
+**Create a MLTable data asset**
+A MLTable data asset allows you to point to tabular data. When you create a MLTable data asset, you specify the schema definition to read the data.
+
+*Note*: in storage account under same resource group of your workspace you can find default container for data assets: __azureml-blobstore-…__ 
+
+*Note*:When you create a data asset and point to a file or folder stored on your local device, a copy of the file or folder will be uploaded to the default datastore workspaceblobstore
+*Note*: Notebooks are saved in Azure storage account file shared
