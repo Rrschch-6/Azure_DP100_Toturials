@@ -31,6 +31,7 @@ ml_client.create_or_update(blob_datastore)
 </pre>
 
 *Create Datastore with SAS Key:*
+
 <pre>
 blob_datastore = AzureBlobDatastore(
 name="blob_sas_example",
@@ -42,7 +43,7 @@ sas_token="?xx=XXXX-XX-XX&xx=xxxx&xxx=xxx&xx=xxxxxxxxxxx&xx=XXXX-XX-XXXXX:XX:XXX
 ),
 )
 ml_client.create_or_update(blob_datastore
-<pre>
+</pre>
 
 
 
@@ -61,6 +62,7 @@ he supported paths you can use when creating a URI file data asset are:
 When you create a data asset and point to a file or folder stored on your local device, a copy of the file or folder will be uploaded to the default datastore workspaceblobstore.
 
 **Create a URI file/folder data asset**
+
 <pre>
 from azure.ai.ml.entities import Data
 from azure.ai.ml.constants import AssetTypes
@@ -76,7 +78,7 @@ my_data = Data(
 )
 
 ml_client.data.create_or_update(my_data)
-<pre>
+</pre>
 
 **Create a MLTable data asset**
 A MLTable data asset allows you to point to tabular data. When you create a MLTable data asset, you specify the schema definition to read the data.
