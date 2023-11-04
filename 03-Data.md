@@ -16,8 +16,7 @@ When you create a datastore with an existing storage account on Azure, you have 
 - **Identity-based**: Use your Microsoft Entra identity or managed identity.
 
 *Create Datastore with Account Key:*
-<pre>
-```python
+<pre>s
 blob_datastore = AzureBlobDatastore(
     			name = "blob_example",
     			description = "Datastore pointing to a blob container",
@@ -28,7 +27,6 @@ blob_datastore = AzureBlobDatastore(
     			),
 )
 ml_client.create_or_update(blob_datastore)
-```
 </pre>
 *Create Datastore with SAS Key:*
 
