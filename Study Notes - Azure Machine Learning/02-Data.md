@@ -52,7 +52,7 @@ ml_client.create_or_update(blob_datastore
 
 A Data Asset in Azure ML is a specific piece of data stored in a Datastore. Creating a Data Asset is useful when you want to organize and version specific datasets and track their metadata.
 
-he supported paths you can use when creating a URI file data asset are:
+The supported paths you can use when creating a URI file data asset are:
 
 - Local: ./<path>
 - Azure Blob Storage: wasbs://<account_name>.blob.core.windows.net/<container_name>/<folder>/<file>
